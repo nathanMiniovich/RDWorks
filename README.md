@@ -20,6 +20,13 @@ pip install build/(32 or 64-bit wheel file).whl
 pip install -U gensim
 ```
 
+Aside from gensim (which should have implicitly installed scipy) we will also need sklearn and pandas, so please also run the following:
+
+```
+pip install -U sklearn
+pip install -U pandas
+```
+
 Since we will be tokenizing Japanese text we will also need a Japanese text tokenizer. Japanese writing does not include spaces so writing one ourselves is quite a challenge.
 This time around we will be leveraging MeCab to help us, you can download the unofficial 64-bit version of MeCab [here](https://github.com/ikegami-yukino/mecab/releases).
 NOTE: The official version of MeCab only supports 32-bit
@@ -31,8 +38,9 @@ pip install ipykernel
 pip install mecab
 ```
 
-We will be using a special colloquial japanese mecab dictionary from mecab-ipadic-neologd. Getting this for windows is a bit of a pain and requires a custom compilation so I have provided
-my file in the repo; more on this in the next section.
+We will be using a special colloquial japanese mecab dictionary from mecab-ipadic-neologd. Getting this for windows is a bit of a pain and requires a custom compilation so I will provide
+my file in the repo once I have git-lfs up and running.
+If you would like to compile your own you can find a guide [here](https://qiita.com/zincjp/items/c61c441426b9482b5a48) (text in Japanese).
 
 ### The Model
 
@@ -44,6 +52,18 @@ Either run wget on the commandline or use something else from urllib.
 
 I might add more detail about the scraping and tokenization process later, but for now I will just provide the model file. Feel free to spend a few hours figuring out how to recreate
 them yourself ;)
-NOTE: Only the main model file is small enough to be uploaded, will upload the others later using git lfs. The other model files are also necessary
+NOTE: Only the main model file is small enough to be uploaded to github, will upload the others later using git-lfs. The other model files are also necessary to load the model.
 
-You are now ready to run word2vec.py!
+You are now ready to run k_means_clustering.py!
+
+### The Script
+
+We will be performing k_means_clustering on the Word2Vec model in order to create clusters of related words. You can read more about it [here](https://en.wikipedia.org/wiki/K-means_clustering)
+
+At the moment the script is fairly barebones and takes no arguments, you can just run it with:
+
+```
+python k_means_clustering.py
+```
+
+Clustering on the word vectors will take some time so just be patient and let it run. It should produce "jawiki_kmeans.csv" as output.
