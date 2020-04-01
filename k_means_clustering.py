@@ -42,7 +42,7 @@ def main():
     centers, clusters = clustering_on_wordvecs(vectors, 50);
 
     print("Getting top words in each cluster...")
-    top_words = get_top_words(model.wv.index2word, 5000, centers, vectors)
+    top_words = get_top_words(model.wv.index2word, 20, centers, vectors)
 
     top_words.to_csv("jawiki_kmeans.csv", encoding="utf-8")
 
